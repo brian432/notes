@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom"
 import { Formik, Form, Field } from "formik"
-import { validationSchemaLogin } from "../../utils/validationSchema"
-import { postLogin } from "../../store/actions/loginActions"
+import { validationSchemaLogin } from "../../../utils/validationSchema"
+import { loginIncorrect, postLogin } from "../../../store/actions/loginActions"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from "react"
-import { swalLoginFailure } from "../../utils/swal"
+import { swalLoginFailure } from "../../../utils/swal"
 
 export const Login = () => {
     const { login } = useSelector(state => state.loginReducer)
@@ -16,6 +16,7 @@ export const Login = () => {
             navigate("/", { replace: true })
         } else if (login === false) {
             swalLoginFailure()
+            dispatch(loginIncorrect())
         }
     }, [login])
 

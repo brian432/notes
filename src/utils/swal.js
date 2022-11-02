@@ -29,3 +29,11 @@ export const swalLoginFailure = () => {
         ...swalProps
     })
 }
+
+export const swalTokenMissing = () => {
+    Swal.fire({
+        title: 'Token invalido',
+        text: 'Cierre e inicie sesión nuevamente',
+        ...swalProps
+    })
+}

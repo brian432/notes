@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom"
 
 import { Formik, Form, Field } from "formik"
-import { validationSchema } from "../../utils/validationSchema"
-import { swalRegisterFalse, swalRegisterSuccess } from "../../utils/swal"
+import { validationSchema } from "../../../utils/validationSchema"
+import { swalRegisterFalse, swalRegisterSuccess } from "../../../utils/swal"
 import { useSelector, useDispatch } from 'react-redux'
 
-import { postRegister, switchRegister } from "../../store/actions/registerAction"
+import { postRegister, switchRegister } from "../../../store/actions/registerAction"
 import { useEffect } from "react"
 
 export const Register = () => {
@@ -15,8 +15,8 @@ export const Register = () => {
 
     useEffect(() => {
         if (register) {
-            dispatch(switchRegister())
             swalRegisterSuccess()
+            dispatch(switchRegister())
             navigate('/login', { replace: true })
 
         } else if (register === false) {

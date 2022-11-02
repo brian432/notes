@@ -1,14 +1,16 @@
 const initialState = {
-    login: null
+    login: null,
+    notes:[]
 }
 
 export const loginReducer = (state = initialState, action) => {
     switch (action.type) {
         case "LOGIN_SUCCESS":
-            localStorage.setItem("token", action.payload.token)
+            localStorage.setItem("LoggedAppUser", action.payload.token)
             return {
                 ...state,
-                login: true
+                login: true,
+                notes:action.payload.notes
             }
         case "LOGIN_FAILURE":
             return {
@@ -20,12 +22,11 @@ export const loginReducer = (state = initialState, action) => {
                 login: null
             }
         case "LOGOUT":
-            localStorage.removeItem("token")
+            localStorage.removeItem("LoggedAppUser")
             return {
                 login: null
             }
         default:
             return state
-
     }
 }

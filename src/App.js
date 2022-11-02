@@ -1,14 +1,13 @@
 import { Route, Routes } from "react-router-dom"
 
-import { useState, useEffect } from "react"
-
-import { Note } from "./components/Note"
-import { Register } from "./components/auth/register"
-import { Login } from "./components/auth/login"
-import { Home } from "./components/home/home"
+import { Register } from "./components/views/auth/register"
+import { Login } from "./components/views/auth/login"
+import { Home } from "./components/views/home/home"
 import { RequireAuth } from "./components/requireAuth.js/requireAuth"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
 
-import { getAll, create, update } from "./services/notes"
+import { getNotes } from "./store/actions/noteActions"
 
 const App = () => {
 	/*const [notes, setNotes] = useState([])
@@ -42,20 +41,17 @@ const App = () => {
 		? notes
 		: notes.filter(note => note.important)
 
+*/
+	const dispatch = useDispatch()
 
-	const toggleImportanceOf = id => {
-		const note = notes.find(n => n.id === id)
-		const changedNote = { ...note, important: !note.important }
+	useEffect(() => {
+		const LoggedAppUser = localStorage.getItem("LoggedAppUser")
+		if (LoggedAppUser) {
+			dispatch(getNotes())
+			console.log("Appp")
+		}
+	}, [])
 
-		update(id, changedNote)
-			.then(res =>
-				setNotes(notes.map(note =>
-					note.id !== id
-						? note
-						: res
-				))
-			)
-	}*/
 
 	return (
 		<Routes>
